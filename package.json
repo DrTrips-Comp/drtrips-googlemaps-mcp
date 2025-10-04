@@ -25,6 +25,14 @@
     "stdio",
     "modelcontextprotocol"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp/issues"
+  },
+  "homepage": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp#readme",
   "author": "",
   "license": "MIT",
   "dependencies": {
