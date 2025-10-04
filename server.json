@@ -1,0 +1,36 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/registry/main/schema/server.schema.json",
+  "name": "io.github.drtrips-comp.drtrips-google-mcp",
+  "description": "MCP server for Google Places API with geocoding, place search, and place details functionality",
+  "version": "1.0.0",
+  "homepage": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp.git"
+  },
+  "license": "MIT",
+  "capabilities": {
+    "tools": [
+      {
+        "name": "geocode_address",
+        "description": "Convert an address to geographic coordinates using Google Geocoding API"
+      },
+      {
+        "name": "get_place_details",
+        "description": "Get detailed information about a place using Google Places API (by place ID or search query)"
+      }
+    ]
+  },
+  "package": {
+    "type": "npm",
+    "name": "drtrips-google-mcp"
+  },
+  "environment": {
+    "required": [
+      {
+        "name": "GOOGLE_MAPS_API_KEY",
+        "description": "Google Maps API key with Places API and Geocoding API enabled"
+      }
+    ]
+  }
+}

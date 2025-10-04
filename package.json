@@ -2,6 +2,7 @@
   "name": "drtrips-google-mcp",
   "version": "1.0.0",
   "description": "MCP server for Google Places API with stdio transport",
+  "mcpName": "io.github.drtrips-comp.drtrips-google-mcp",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -37,8 +38,8 @@
   "devDependencies": {
     "@types/node": "^20",
     "shx": "^0.3.4",
-    "typescript": "^5.3.0",
-    "tsx": "latest"
+    "tsx": "latest",
+    "typescript": "^5.3.0"
   },
   "engines": {
     "node": ">=18"
