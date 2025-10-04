@@ -1,6 +1,6 @@
 {
   "name": "drtrips-google-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for Google Places API with stdio transport",
   "mcpName": "io.github.drtrips-comp.drtrips-google-mcp",
   "type": "module",
