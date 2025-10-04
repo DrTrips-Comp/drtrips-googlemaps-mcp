@@ -3,7 +3,7 @@
   "name": "drtrips-google-mcp",
   "displayName": "DrTrips Google Places MCP",
   "description": "MCP server for Google Places API with geocoding, place search, and place details via stdio",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "icon": "https://www.gstatic.com/images/branding/product/2x/maps_96dp.png",
   "license": "MIT",
   "keywords": [
