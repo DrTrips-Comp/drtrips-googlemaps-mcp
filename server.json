@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/registry/main/schema/server.schema.json",
   "name": "io.github.drtrips-comp.drtrips-google-mcp",
   "description": "MCP server for Google Places API with geocoding, place search, and place details functionality",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp",
   "repository": {
     "type": "git",
