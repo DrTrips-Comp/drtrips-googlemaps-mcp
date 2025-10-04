@@ -1,27 +1,56 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
-  "name": "io.github.drtrips-comp/drtrips-google-mcp",
-  "description": "MCP server for Google Places API - geocoding, place details, and distance matrix",
+  "$schema": "https://mcp-registry.s3.amazonaws.com/schema.json",
+  "name": "drtrips-google-mcp",
+  "displayName": "DrTrips Google Places MCP",
+  "description": "MCP server for Google Places API with geocoding, place search, and place details via stdio",
   "version": "1.0.0",
+  "icon": "https://www.gstatic.com/images/branding/product/2x/maps_96dp.png",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "google-maps",
+    "google-places",
+    "geocoding",
+    "places",
+    "maps",
+    "stdio",
+    "typescript"
+  ],
+  "categories": [
+    "data-integration",
+    "location-services"
+  ],
+  "homepage": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp",
   "repository": {
-    "url": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp",
-    "source": "github"
+    "type": "git",
+    "url": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp.git"
   },
-  "packages": [
-    {
-      "registry_type": "npm",
-      "identifier": "drtrips-google-mcp",
-      "version": "1.0.0",
-      "transport": {
-        "type": "stdio"
-      },
-      "environment_variables": [
-        {
-          "name": "GOOGLE_MAPS_API_KEY",
-          "description": "Google Maps API key for accessing Places API, Geocoding API, and Distance Matrix API",
-          "is_required": true
-        }
-      ]
+  "deployment": {
+    "type": "package",
+    "package": {
+      "type": "npm",
+      "name": "drtrips-google-mcp",
+      "registry": "https://registry.npmjs.org"
     }
-  ]
+  },
+  "config": {
+    "env": {
+      "GOOGLE_MAPS_API_KEY": {
+        "description": "Google Maps API key with Places API enabled",
+        "required": true
+      }
+    }
+  },
+  "capabilities": {
+    "tools": [
+      {
+        "name": "geocode_address",
+        "description": "Convert an address to geographic coordinates (latitude/longitude)"
+      },
+      {
+        "name": "get_place_details",
+        "description": "Get detailed information about a place using Google Place ID or search query"
+      }
+    ]
+  }
 }
