@@ -1,6 +1,6 @@
 {
-  "$schema": "https://mcp-registry.s3.amazonaws.com/schema.json",
-  "name": "drtrips-google-mcp",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-16/server.schema.json",
+  "name": "io.github.drtrips-comp/drtrips-google-mcp",
   "displayName": "DrTrips Google Places MCP",
   "description": "MCP server for Google Places API with geocoding, place search, and place details via stdio",
   "version": "1.0.3",
@@ -23,7 +23,8 @@
   "homepage": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp.git"
+    "url": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp.git",
+    "source": "https://github.com/DrTrips-Comp/drtrips-googlemaps-mcp"
   },
   "deployment": {
     "type": "package",
