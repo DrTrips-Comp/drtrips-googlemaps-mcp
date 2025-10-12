@@ -1,4 +1,4 @@
-# Google Places MCP Server (TypeScript)
+# Google Platform MCP Server (TypeScript)
 
 A Model Context Protocol (MCP) server that provides Google Places API and Google Maps Geocoding API functionality via stdio transport.
 
@@ -7,7 +7,7 @@ A Model Context Protocol (MCP) server that provides Google Places API and Google
 - **Geocode Address**: Convert addresses to coordinates using Google Maps Geocoding API
 - **Get Place Details**: Retrieve detailed place information using Google Places API (New)
 - **TypeScript**: Full type safety with Zod validation
-- **NPX Ready**: Can be run directly via npx or node
+- **npx-first**: Run the server directly with `npx drtrips-google-mcp`
 
 ## Tools Available
 
@@ -25,11 +25,23 @@ Geocode an address to get coordinates and place information.
   - `latitude`: Latitude coordinate
   - `longitude`: Longitude coordinate
 
-**Example:**
+**Example Input:**
 ```json
 {
   "address": "1600 Amphitheatre Parkway, Mountain View, CA"
 }
+```
+
+**Example Output:**
+```json
+[
+  {
+    "place_id": "ChIJ2eUgeAK6j4ARbn5u_wAGqWA",
+    "address": "1600 Amphitheatre Parkway, Mountain View, CA 94043, USA",
+    "latitude": 37.4224764,
+    "longitude": -122.0842499
+  }
+]
 ```
 
 ### 2. `get_place_details`
@@ -51,59 +63,42 @@ Get detailed information about a place using either a place_id or a search query
   - `types`: Place types (e.g., restaurant, cafe)
   - `googleMapsLinks`: Google Maps and Directions URLs
 
-**Example:**
+**Example Input:**
 ```json
 {
   "query": "Statue of Liberty"
 }
 ```
 
-## Installation
-
-### Prerequisites
-
-- Node.js v18+ and npm
-- Google Maps API Key with the following APIs enabled:
-  - Geocoding API
-  - Places API (New)
-
-### Setup
-
-1. **Clone or navigate to the project:**
-```bash
-cd google_place_api_mcp
+**Example Output:**
+```json
+{
+  "id": "ChIJPTacEpBQwokRKwIlDXelxkA",
+  "displayName": "Statue of Liberty",
+  "formattedAddress": "New York, NY 10004, United States",
+  "location": {
+    "latitude": 40.6892494,
+    "longitude": -74.04450039999999
+  },
+  "types": [
+    "tourist_attraction",
+    "point_of_interest",
+    "establishment"
+  ],
+  "googleMapsLinks": {
+    "mapsUri": "https://maps.google.com/?cid=1275417193933034028",
+    "directionsUri": "https://www.google.com/maps/dir/?api=1&destination=40.6892494,-74.04450039999999"
+  }
+}
 ```
 
-2. **Install dependencies:**
-```bash
-npm install
-```
-
-3. **Build the project:**
-```bash
-npm run build
-```
-
-4. **Set up environment variables:**
-
-Create a `.env` file in the project root:
-```bash
-GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
-```
 
 ## Usage
 
-### Run Locally
+### Run with npx (recommended)
 
 ```bash
-# Using npm script
-npm start
-
-# Using node directly
-node dist/index.js
-
-# Development mode (with auto-reload)
-npm run dev
+GOOGLE_MAPS_API_KEY=your_api_key_here 
 ```
 
 ### Configure with Claude Desktop
@@ -112,22 +107,6 @@ Add to your Claude Desktop config file:
 
 **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "google-places": {
-      "command": "node",
-      "args": ["D:/path/to/google_place_api_mcp/dist/index.js"],
-      "env": {
-        "GOOGLE_MAPS_API_KEY": "your_api_key_here"
-      }
-    }
-  }
-}
-```
-
-Or if published to npm:
 
 ```json
 {
@@ -143,54 +122,6 @@ Or if published to npm:
 }
 ```
 
-## Development
-
-### Scripts
-
-```bash
-# Build the project
-npm run build
-
-# Watch mode (rebuild on changes)
-npm run watch
-
-# Development mode with tsx
-npm run dev
-
-# Run the built server
-npm start
-```
-
-### Project Structure
-
-```
-google_place_api_mcp/
-├── src/
-│   ├── config/
-│   │   └── settings.ts          # Environment configuration
-│   ├── models/
-│   │   └── maps-models.ts       # Zod schemas and TypeScript types
-│   ├── services/
-│   │   └── google-places-api.ts # Google API client
-│   ├── server.ts                # MCP server setup
-│   └── index.ts                 # Stdio entry point
-├── dist/                        # Compiled JavaScript (generated)
-├── package.json
-├── tsconfig.json
-└── .env                         # Environment variables (create this)
-```
-
-## Migration from Python
-
-This server was migrated from a Python-based MCP server to TypeScript. Key changes:
-
-- **Pydantic → Zod**: Input validation using Zod schemas
-- **aiohttp → axios**: HTTP client for API requests
-- **Python MCP SDK → TypeScript MCP SDK**: Server implementation
-- **stdio transport**: Compatible with Claude Desktop and other MCP clients
-
-For detailed migration steps, see `docs/MIGRATION_GUIDE_PYTHON_TO_TYPESCRIPT.md`
-
 ## API Usage and Pricing
 
 This server uses:
@@ -199,33 +130,7 @@ This server uses:
 
 Ensure you have these APIs enabled in your Google Cloud Console and monitor your usage.
 
-## Troubleshooting
-
-### API Key Not Set
-
-```
-ERROR: GOOGLE_MAPS_API_KEY environment variable is not set
-```
-
-**Solution**: Create a `.env` file with your API key or set it in your environment.
-
-### Module Resolution Errors
-
-Ensure all imports include `.js` extensions:
-```typescript
-import { something } from './file.js';  // ✅ Correct
-import { something } from './file';      // ❌ Wrong
-```
-
-### Build Errors
-
-```bash
-# Clean build
-rm -rf dist/
-npm run build
-```
 
 ## License
 
 MIT
-# drtrips-googlemaps-mcp
