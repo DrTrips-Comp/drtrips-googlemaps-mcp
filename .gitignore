@@ -35,6 +35,8 @@ test-*.js
 test-*.ts
 *.test.js
 *.test.ts
+TEST-RESULTS.md
+evaluations/
 
 # Logs
 logs/

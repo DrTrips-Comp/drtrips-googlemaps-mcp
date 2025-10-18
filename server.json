@@ -3,7 +3,7 @@
   "name": "io.github.drtrips-comp/drtrips-google-mcp",
   "displayName": "DrTrips Google Places MCP",
   "description": "MCP server for Google Places API with geocoding, place search, and place details via stdio",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "icon": "https://www.gstatic.com/images/branding/product/2x/maps_96dp.png",
   "license": "MIT",
   "keywords": [
@@ -45,12 +45,16 @@
   "capabilities": {
     "tools": [
       {
-        "name": "geocode_address",
+        "name": "google_maps_geocode_address",
         "description": "Convert an address to geographic coordinates (latitude/longitude)"
       },
       {
-        "name": "get_place_details",
+        "name": "google_maps_get_place_details",
         "description": "Get detailed information about a place using Google Place ID or search query"
+      },
+      {
+        "name": "google_maps_calculate_distance_matrix",
+        "description": "Calculate travel distance and time between multiple origins and destinations"
       }
     ]
   }

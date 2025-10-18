@@ -45,15 +45,29 @@ export class GooglePlacesAPI {
         };
       }
 
-      return { error: `Place details request failed: ${response.status}` };
+      return { error: `Place details request failed with status ${response.status}. Please try again.` };
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
-        return {
-          error: `Place details API error: ${axiosError.response?.status} - ${axiosError.message}`
-        };
+        const status = axiosError.response?.status;
+
+        switch (status) {
+          case 404:
+            return { error: 'Place not found. Please verify the place_id is correct or try using a search query instead.' };
+          case 403:
+            return { error: 'Access denied. Please check your Google Maps API key has Places API (New) enabled in Google Cloud Console.' };
+          case 429:
+            return { error: 'Rate limit exceeded. Please wait a moment before making more requests.' };
+          case 400:
+            return { error: 'Invalid request. Please check that the place_id format is correct.' };
+          default:
+            if (axiosError.code === 'ECONNABORTED') {
+              return { error: 'Request timed out. Please try again.' };
+            }
+            return { error: `API error (${status || 'unknown'}). Please try again or contact support if the issue persists.` };
+        }
       }
-      return { error: error instanceof Error ? error.message : 'Unknown error' };
+      return { error: error instanceof Error ? error.message : 'Unknown error occurred' };
     }
   }
 
@@ -96,15 +110,29 @@ export class GooglePlacesAPI {
         return { error: 'No places found for the given query' };
       }
 
-      return { error: `Place search request failed: ${response.status}` };
+      return { error: `Place search request failed with status ${response.status}. Please try again.` };
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
-        return {
-          error: `Place search API error: ${axiosError.response?.status} - ${axiosError.message}`
-        };
+        const status = axiosError.response?.status;
+
+        switch (status) {
+          case 404:
+            return { error: 'Search endpoint not found. Please verify your API configuration.' };
+          case 403:
+            return { error: 'Access denied. Please check your Google Maps API key has Places API (New) enabled in Google Cloud Console.' };
+          case 429:
+            return { error: 'Rate limit exceeded. Please wait a moment before making more requests.' };
+          case 400:
+            return { error: 'Invalid search query. Please provide a valid search term.' };
+          default:
+            if (axiosError.code === 'ECONNABORTED') {
+              return { error: 'Request timed out. Please try again with a simpler query.' };
+            }
+            return { error: `API error (${status || 'unknown'}). Please try again or contact support if the issue persists.` };
+        }
       }
-      return { error: error instanceof Error ? error.message : 'Unknown error' };
+      return { error: error instanceof Error ? error.message : 'Unknown error occurred' };
     }
   }
 
@@ -141,15 +169,27 @@ export class GooglePlacesAPI {
         return { error: `Geocoding failed with status: ${data.status}` };
       }
 
-      return { error: `Geocoding request failed: ${response.status}` };
+      return { error: `Geocoding request failed with status ${response.status}. Please try again.` };
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
-        return {
-          error: `Geocoding API error: ${axiosError.response?.status} - ${axiosError.message}`
-        };
+        const status = axiosError.response?.status;
+
+        switch (status) {
+          case 403:
+            return { error: 'Access denied. Please check your Google Maps API key has Geocoding API enabled in Google Cloud Console.' };
+          case 429:
+            return { error: 'Rate limit exceeded. Please wait a moment before making more requests.' };
+          case 400:
+            return { error: 'Invalid address format. Please provide a valid address.' };
+          default:
+            if (axiosError.code === 'ECONNABORTED') {
+              return { error: 'Request timed out. Please try again.' };
+            }
+            return { error: `API error (${status || 'unknown'}). Please try again or contact support if the issue persists.` };
+        }
       }
-      return { error: error instanceof Error ? error.message : 'Unknown error' };
+      return { error: error instanceof Error ? error.message : 'Unknown error occurred' };
     }
   }
 
@@ -186,15 +226,27 @@ export class GooglePlacesAPI {
         return { error: `Distance Matrix API failed with status: ${data.status}` };
       }
 
-      return { error: `Distance Matrix request failed: ${response.status}` };
+      return { error: `Distance Matrix request failed with status ${response.status}. Please try again.` };
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
-        return {
-          error: `Distance Matrix API error: ${axiosError.response?.status} - ${axiosError.message}`
-        };
+        const status = axiosError.response?.status;
+
+        switch (status) {
+          case 403:
+            return { error: 'Access denied. Please check your Google Maps API key has Distance Matrix API enabled in Google Cloud Console.' };
+          case 429:
+            return { error: 'Rate limit exceeded. Please wait a moment before making more requests.' };
+          case 400:
+            return { error: 'Invalid request. Please check that origins and destinations are valid addresses or coordinates.' };
+          default:
+            if (axiosError.code === 'ECONNABORTED') {
+              return { error: 'Request timed out. Please try again with fewer locations.' };
+            }
+            return { error: `API error (${status || 'unknown'}). Please try again or contact support if the issue persists.` };
+        }
       }
-      return { error: error instanceof Error ? error.message : 'Unknown error' };
+      return { error: error instanceof Error ? error.message : 'Unknown error occurred' };
     }
   }
 }
